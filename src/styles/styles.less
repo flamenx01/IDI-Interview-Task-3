@@ -1,0 +1,182 @@
+// Include Bootstrap and FontAwesome
+@import "bootstrap/bootstrap";
+@import "fontawesome/font-awesome.less";
+
+// Main Variables
+@main-color:                #ffcc00;
+@alt-color:                 #666666;
+@main-color-text:           black;
+@alt-color-text:            white;
+
+// Secondary Variables
+@main-color-light:          lighten(@main-color, 35%);
+@main-color-dark:           darken(@main-color,10%);
+
+// Font Variables
+@font-face {
+  font-family: OpenSans; 
+  src: url(/fonts/SourceSansPro-Regular.ttf); 
+}
+
+@font-face {
+  font-family: BauerBodoni;
+  src: url(/fonts/Bauer-Bodoni-Bold-Italic.ttf);
+}
+
+@main-font:  OpenSans;
+@title-font: BauerBodoni;
+
+body { font-family: @main-font; }
+
+// README
+// 
+// Please add your own styles below this point.
+// LESS variables are provided above to help with the task.
+// Bootstrap and FontAwesome are also included.
+// You can write your styles in LESS or css format. 
+// An example of some LESS styles are provided below. Please remove or comment out when adding your own code.
+
+
+body {
+  padding: 0px;
+  
+}
+
+.top-bar {//controls the header bar
+	background-color: #ededed;
+    position:absolute;
+    left:178px; right:0;
+    height: 40px;
+}
+
+.top-text {
+	padding: 10px 10px 10px 10px;
+	color:@alt-color;
+}
+
+.top{//controls the heading box
+	background-color: white;
+    position:absolute;
+    left:178px; top:40px; right:0;
+	height: 20px;
+}
+
+.heading-text{
+	padding: 10px 10px 10px 10px;
+	font-size: 25px;
+}
+
+.left {//left menu bar
+	background-color: @main-color;
+    position:absolute;
+    left:0; top:0; bottom: 0;
+    width: 178px;
+
+}
+.main {
+	background-color: #ededed;
+    position: absolute;
+    left:178px; top:92px; right:0; bottom:0;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+.logo {
+	padding: 40px 0 40px 0;
+
+}
+
+.ul-sidebar {
+	list-style-type: none;
+    list-style-image: none;
+    margin: 0;
+    padding: 0px 0 0 10px;
+}
+
+.li-sidebar {
+    padding: 10px 0 10px 0;
+}
+
+.panel{
+	margin:10px;
+	height: 95%;
+}
+
+.panel-widget{
+	padding: 0px;
+}
+
+
+.panel-default>.panel-heading{
+background-color: #ddd;
+font-family: @main-font;
+font-weight: bold;
+}
+
+.panel-default>.panel-footer{
+background-color: white;
+max-height: 10%;	
+}
+
+.btn-calendar{
+border: 1px solid #777
+}
+
+.btn-MBA {//special layout for MBA box
+    background-color: white;
+    border-color: #f7cd45;
+	border-width: 3px;
+	display:block;
+    margin: 0 auto;
+	font-weight: bold;
+	width: 75%;
+}
+
+.btn-MBA+.btn-MBA {
+    margin-top: 25px;
+}
+
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+.lowpadding {
+   padding: 2px !important;
+   margin: 2px !important;
+}
+
+.row.display-flex {//Makes all the boxes the same height
+  display: flex;
+  flex-wrap: wrap;
+}
+.row.display-flex > [class*='col-'] {
+  flex-grow: 1;
+}
+
+
+a { color: inherit; } 
+
+
+.profile-widget .image-container {//used to create the profile widget
+  background-size: cover ;
+  background-position: center;
+  padding: 100px 0 10px;
+}
+.profile-widget .image-container .profile-background {
+  width: 100%;
+  height: auto;
+}
+.profile-widget .image-container .avatar {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto -60px;
+  display: block;
+}
+.profile-widget .details {
+	color: #aaa;
+	padding: 50px 15px 100px;
+	text-align: center;
+} 
+
+
