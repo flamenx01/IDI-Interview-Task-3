@@ -8,6 +8,38 @@
 </head>
 <body>
 
+
+	<script><!--json file added here since browsers block external json files for security reasons-->
+				
+				var notificationModule = angular.module("notificationsList", [])
+
+				notificationModule.filter('formatDate', function () {<!-- format time to days/hour/minutes etc since post-->
+				   return function (input) {
+					   var date = moment(new Date(input)).fromNow();
+					  return date;
+				   }
+				})
+
+
+				 
+				notificationModule.controller('myCtrl', function($scope, $http) {
+				$http.get("./data.json").then(function(res){$scope.posts = res.data;})
+				});
+				
+				
+				
+				
+				
+				notificationModule.controller('myCtrlTime', function($scope) {
+					$scope.date = new Date();
+				});
+				
+				//angular.bootstrap(document.getElementById("App1"), ['timeApp']);
+				//angular.bootstrap(document.getElementById("App2"), ['notificationsList']);
+
+
+	</script>
+<div ng-app="notificationsList">
 	<div class="top-bar">
 		<div class="top-text">
 			<i align= "middle" class="fa fa-navicon" aria-hidden="true"></i>
@@ -72,8 +104,10 @@
                 </div>
                 <div class="col-sm-12">
                     <div class="details">
-                        <h4><i class="fa fa-calendar" aria-hidden="true"></i>19/09/17 &emsp; <i class="fa fa-clock-o" aria-hidden="true"></i>10:18 AM</h4><!-- would use javascript for current date and time-->
+					<div ng-controller="myCtrlTime">
+                        <h4><i class="fa fa-calendar" aria-hidden="true"></i> {{date | date:'dd/MM/yy'}} &emsp; <i class="fa fa-clock-o" aria-hidden="true"></i> {{date | date:'hh:mm a'}}</h4><!-- would use javascript for current date and time-->
                     </div>
+					</div>
                 </div>
             </div>
 					
@@ -94,27 +128,9 @@
 			<div class="panel panel-default">
 			
 			
-					<script><!--json file added here since browsers block external json files for security reasons-->
-				
-				var app = angular.module("notificationsList", []);
-
-				app.filter('formatDate', function () {<!-- format time to days/hour/minutes etc since post-->
-				   return function (input) {
-					   var date = moment(new Date(input)).fromNow();
-					  return date;
-				   }
-				});
 
 
-				 
-				app.controller('myCtrl', function($scope, $http) {
-				$http.get("./data.json").then(function(res){$scope.posts = res.data;})
-				});
-
-
-				</script>
-
-				<div ng-app="notificationsList" ng-controller="myCtrl">
+				<div ng-controller="myCtrl">
 				<div ng-repeat="x in posts|limitTo:3"> <!-- Loop over first 3 in the JSON file-->
 					<div class="alert-box error flex-center-vertically" ng-switch on="x.type"><!--switch based on which notificition type-->
 
@@ -301,7 +317,8 @@
 		  </div>
 		  <div class="col-xs-10 col-sm-10 col-md-6"><!--calendar widget-->
 			<div class="panel panel-default">
-				<div class="panel-heading">September 2017
+			
+				<div class="panel-heading"> <span ng-controller="myCtrlTime">{{date | date:'MMMM yyyy'}}</span>
 				<div style="float:right;">
 				<button class="btn btn-secondary btn-sm btn-calendar" type="button"><b>iCal</b></button>&ensp;
 				<button class="btn btn-secondary btn-sm btn-calendar" type="button"><b>Today</b></button>&ensp;
@@ -317,5 +334,6 @@
 		  </div>
 		</div>
 	</div>
+</div>
 </body>
 </html>
