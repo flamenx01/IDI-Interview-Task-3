@@ -4,6 +4,7 @@
   <title>IDI Interview</title>
   <link rel="stylesheet" type="text/css" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="moment.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -99,7 +100,7 @@
 
 				app.filter('formatDate', function () {<!-- format time to days/hour/minutes etc since post-->
 				   return function (input) {
-					   var date = input;//moment(new Date(input)).fromNow();
+					   var date = moment(new Date(input)).fromNow();
 					  return date;
 				   }
 				});

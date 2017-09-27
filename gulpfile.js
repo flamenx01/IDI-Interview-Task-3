@@ -32,6 +32,10 @@ var projectHTMLWatchFiles    = './src/**/*.html';
 var jsonSRC                  = './src/**/*.json';
 var jsonDestination          = './build/';
 
+//json
+var jsSRC                  = './src/**/*.js';
+var jsDestination          = './build/';
+
 const AUTOPREFIXER_BROWSERS = [
   'last 2 version',
   '> 1%',
@@ -80,7 +84,8 @@ var notify = {
   styles: { errorHandler: notify.onError('STYLES: BUILD FAILED!\n' + 'Error:\n<%= error.message %>') },
   font: { errorHandler: notify.onError('FONTS: SOMETHING WRONG!\n' + 'Error:\n<%= error.message %>') },
   img: { errorHandler: notify.onError('IMAGES: SOMETHING WRONG!\n' + 'Error:\n<%= error.message %>') },
-  json: { errorHandler: notify.onError('JSON: SOMETHING WRONG!\n' + 'Error:\n<%= error.message %>') },  
+  json: { errorHandler: notify.onError('JSON: SOMETHING WRONG!\n' + 'Error:\n<%= error.message %>') },
+  js: { errorHandler: notify.onError('JS: SOMETHING WRONG!\n' + 'Error:\n<%= error.message %>') }  
 };
 
 /**
@@ -146,6 +151,18 @@ gulp.task('json', function() {
 });
 
 /**
+* Task: `js`.
+* Copies all js files that are in ./src/** maintaining directory structure
+*/
+gulp.task('js', function() {
+  return gulp
+    .src(jsSRC)
+    .pipe(plumber(notify.js))
+    .pipe(gulp.dest(jsDestination))
+    .pipe(browserSync.reload({ stream: true }))
+});
+
+/**
 * Task: `images`.
 * Minifies PNG, JPEG, GIF and SVG images.
 */
@@ -187,5 +204,5 @@ gulp.task( 'browser-sync', function() {
   gulp.watch(styleWatchFiles, ['styles']);
 });
 
-gulp.task('build', ['html', 'styles', 'json', 'fonts', 'images']);
+gulp.task('build', ['html', 'styles', 'json', 'js', 'fonts', 'images']);
 gulp.task( 'default', ['build', 'browser-sync']);
