@@ -4,7 +4,9 @@
   "repository": {
     "type": "git"
   },
-  "dependencies": {},
+  "dependencies": {
+    "moment": "^2.18.1"
+  },
   "devDependencies": {
     "browser-sync": "^2.11.1",
     "del": "^2.0.1",

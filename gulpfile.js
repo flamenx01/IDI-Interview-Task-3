@@ -28,6 +28,10 @@ var imagesDestination       = './build/images/';
 var styleWatchFiles         = './src/styles/**/*.less';
 var projectHTMLWatchFiles    = './src/**/*.html';
 
+//json
+var jsonSRC                  = './src/**/*.json';
+var jsonDestination          = './build/';
+
 const AUTOPREFIXER_BROWSERS = [
   'last 2 version',
   '> 1%',
@@ -75,7 +79,8 @@ var notify = {
   html: { errorHandler: notify.onError('HTML: BUILD FAILED!\n' + 'Error:\n<%= error.message %>') },
   styles: { errorHandler: notify.onError('STYLES: BUILD FAILED!\n' + 'Error:\n<%= error.message %>') },
   font: { errorHandler: notify.onError('FONTS: SOMETHING WRONG!\n' + 'Error:\n<%= error.message %>') },
-  img: { errorHandler: notify.onError('IMAGES: SOMETHING WRONG!\n' + 'Error:\n<%= error.message %>') }
+  img: { errorHandler: notify.onError('IMAGES: SOMETHING WRONG!\n' + 'Error:\n<%= error.message %>') },
+  json: { errorHandler: notify.onError('JSON: SOMETHING WRONG!\n' + 'Error:\n<%= error.message %>') },  
 };
 
 /**
@@ -127,6 +132,19 @@ gulp.task('fonts', function() {
     .pipe(browserSync.reload({ stream: true }))
 })
 
+
+/**
+* Task: `json`.
+* Copies all json files that are in ./src/** maintaining directory structure
+*/
+gulp.task('json', function() {
+  return gulp
+    .src(jsonSRC)
+    .pipe(plumber(notify.json))
+    .pipe(gulp.dest(jsonDestination))
+    .pipe(browserSync.reload({ stream: true }))
+});
+
 /**
 * Task: `images`.
 * Minifies PNG, JPEG, GIF and SVG images.
@@ -169,5 +187,5 @@ gulp.task( 'browser-sync', function() {
   gulp.watch(styleWatchFiles, ['styles']);
 });
 
-gulp.task('build', ['html', 'styles', 'fonts', 'images']);
+gulp.task('build', ['html', 'styles', 'json', 'fonts', 'images']);
 gulp.task( 'default', ['build', 'browser-sync']);
